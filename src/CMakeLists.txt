@@ -6,3 +6,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../bin)
 
 project(euler)
 
+add_subdirectory(client)
+
