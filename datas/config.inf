@@ -1,0 +1,8 @@
+
+models
+	model
+		name{str} = text_name
+		pos{vec<3>} = 2.1 3.4 4.1
+	model
+		name{str} = model_2
+		pos<vec> = 0.1 0.2 0.3
