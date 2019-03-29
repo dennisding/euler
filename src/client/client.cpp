@@ -1,32 +1,27 @@
 #include <iostream>
 
+#include <engine/engine.hpp>
+
 #include <GLFW/glfw3.h>
+
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+
+static void tick()
+{
+	engine::instance().tick(0.f);
+}
+
+#endif
 
 
 int main(int argc, const char **argv)
 {
-	GLFWwindow *window = nullptr;
+	engine::instance().init();
 
-	std::cout << "hello world!" << std::endl;
-
-	if (!glfwInit()) {
-		return -1;
-	}
-
-	window = glfwCreateWindow(414, 896, "canvas!!!", nullptr, nullptr);
-	if (!window) {
-		glfwTerminate();
-		return -1;
-	}
-
-	glfwMakeContextCurrent(window);
-	glfwSwapInterval(1);
-
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-	
-	glfwSwapBuffers(window);
-
+#ifdef __EMSCRIPTEN__
+	emscripten_set_main_loop(tick, 60, 1);
+#endif
 }
 
 
